@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flyttende og Stille Knapp med Score Tracker</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            background-color: black; /* Svart bakgrunn */
+            color: white; /* Hvit tekstfarge */
+        }
+        #scoreTracker {
+            position: absolute;
+            top: 20px; /* Plassering øverst */
+            left: 20px; /* Plassering til venstre */
+            font-size: 24px; /* Størrelse på teksten */
+        }
+        #flyttendeKnapp {
+            position: absolute;
+            padding: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #stilleKnapp {
+            position: absolute;
+            bottom: 20px; /* Plassering i bunnen */
+            right: 20px; /* Plassering til høyre */
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: green; /* Bakgrunnsfarge på den stille knappen */
+            color: white; /* Tekstfarge på den stille knappen */
+            border: none;
+            border-radius: 5px; /* Rundede kanter */
+        }
+    </style>
+</head>
+<body>
+
+<div id="scoreTracker">Klikk: 0</div>
+<button id="flyttendeKnapp">Catch me!</button>
+<button id="stilleKnapp">Menu</button>
+
+<script>
+    const flyttendeKnapp = document.getElementById('flyttendeKnapp');
+    const stilleKnapp = document.getElementById('stilleKnapp');
+    const scoreTracker = document.getElementById('scoreTracker');
+
+    let score = 0; // Initial score
+
+    flyttendeKnapp.addEventListener('click', () => {
+        // Øk poengsummen med 1
+        score++;
+        scoreTracker.textContent = `Klikk: ${score}`; // Oppdater score tracker
+
+        // Hent høyden og bredden på vinduet
+        const vinduHøyde = window.innerHeight;
+        const vinduBredde = window.innerWidth;
+
+        // Generer tilfeldige posisjoner
+        const tilfeldigX = Math.random() * (vinduBredde - flyttendeKnapp.offsetWidth);
+        const tilfeldigY = Math.random() * (vinduHøyde - flyttendeKnapp.offsetHeight);
+
+        // Flytt knappen til den tilfeldige posisjonen
+        flyttendeKnapp.style.left = `${tilfeldigX}px`;
+        flyttendeKnapp.style.top = `${tilfeldigY}px`;
+    });
+
+    stilleKnapp.addEventListener('click', () => {
+        // Naviger til en annen side
+        window.location.href = 'index.html'; // Endre til din faktiske URL
+    });
+</script>
+
+</body>
+</html>
